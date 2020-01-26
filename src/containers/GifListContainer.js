@@ -4,11 +4,6 @@ import GifList from '../components/GifList'
 
 export default class GifListContainer extends Component {
 
-    // state
-    // fetch 
-    // save 3 gif to state
-    // pass gif to giflist as prop
-
     state = {
         gifArray: [],
         // query: dolphin
@@ -22,7 +17,6 @@ export default class GifListContainer extends Component {
         fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC&rating=g&limit=3`)
         .then(resp => resp.json())
         .then((info) => {
-            
             this.setState({gifArray: info.data.map((gifs) => ({
                 url: gifs.images.original.url
             })
@@ -37,7 +31,7 @@ export default class GifListContainer extends Component {
         // console.log("gifArray is", this.state.gifArray)
         return (
             <div>
-            < GifSearch fetchfunc={this.fetchFunc} />
+            < GifSearch fetchfunc={this.fetchFunc.bind(this)} />
             < GifList pics={this.state.gifArray} />
             </div>
             )
